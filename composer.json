@@ -1,0 +1,54 @@
+{
+  "name": "afonzeca/arun-core",
+  "description": "ArunCore Library for Arun CLI Microframework",
+  "keywords": [
+    "microframework",
+    "framework",
+    "arun",
+    "arun-core",
+    "cli"
+  ],
+  "type": "library",
+  "time": "2018-11-05",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/afonzeca/arun",
+  "support": {
+    "issues": "https://github.com/afonzeca/arun-core/issues",
+    "source": "https://github.com/afonzeca/arun-core"
+  },
+  "authors": [
+    {
+      "name": "Angelo Fonzeca",
+      "role": "Creator / Main Developer",
+      "homepage": "https://www.linkedin.com/in/angelo-f-1806868/"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-mbstring": "*",
+    "php-di/php-di": "^6.0",
+    "vlucas/phpdotenv": "^2.5",
+    "doctrine/doctrine-bundle": "^1.9",
+    "doctrine/doctrine-module": "^2.1",
+    "doctrine/doctrine-orm-module": "^2.1",
+    "doctrine/annotations": "^1.6",
+    "symfony/event-dispatcher": "^4.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.3",
+    "phpunit/php-invoker": "^2.0"
+  },
+  "suggest": {
+    "spatie/phpunit-watcher": "^1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "ArunCore\\": "src/ArunCore/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ArunCore\\Tests\\": "tests/"
+    }
+  }
+}
