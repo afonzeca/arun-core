@@ -1,16 +1,16 @@
-## "ArunCore" for Arun CLI Microframework PHP7.2+ - Version 0.41-alpha - (C) 2018 by Angelo Fonzeca
+## "Arun-Core" for Arun CLI Microframework PHP7.2+ - Version 0.41-alpha - (C) 2018 by Angelo Fonzeca
 
-### What is ArunCore?
+### What is Arun-Core?
 
-ArunCore is the "core" part of the [Arun Microframework Project](https://github.com/afonzeca/arun).
+Arun-Core is the "core" library part of the [Arun CLI Microframework Project for PHP 7.2+](https://github.com/afonzeca/arun).
 
-In the version 0.41-alpha of the Arun project, the Core (API) and the Framework "boilerplate" were splitted into two
+Starting from the 0.41-alpha version of the Arun project, the Core (API) and the MicroFramework Project Container("boilerplate") were splitted into two
 different repositories for improving code quality, the whole project organization and documentation.
 
-For low level API analysis please take a look to [API Docs](docs/ApiIndex.md) file which helps you to navigate inside the documentation
+Arun-Core contains all the APIs used by Arun. For low level API analysis please take a look to the [API Index](docs/ApiIndex.md) file which helps you to navigate through the documentation
 ( generated with PhpDocumentator and PhpDocMd ).
 
-For further information please refer to the main project at the link showed above.
+For further information please refer to the [main project](https://github.com/afonzeca/arun) documentation.
 
 _DISCLAIMER: This software is a prototype at early stage of development and could have stability and security issues... DO NOT USE IN PRODUCTION ENVIRONMENTS_
 
@@ -42,9 +42,9 @@ Sir Clive Sinclair, Tony Tebby, Adriano Olivetti, Brian Kernighan and Dennis Rit
 
 Main Project link: https://github.com/afonzeca/arun
 
-Core Project link: https://github.com/afonzeca/arun-core
+Core Library Project link: https://github.com/afonzeca/arun-core
 
-See changelog.txt inside the package for details about framework improvements.
+See changelog.txt inside the package for details about releases and improvements.
 
 
 ### Contacts
