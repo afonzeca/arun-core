@@ -29,26 +29,26 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ### Thanks to...
 
-My lovely wife Carla! ILY
+* My lovely wife Carla! ILY
 
-My friend LucaM. from TGG ;-) 
+* My friend LucaM. from TGG ;-) 
 
-Heavy Metal
+* Heavy Metal
 
-Sir Clive Sinclair, Tony Tebby, Adriano Olivetti, Brian Kernighan and Dennis Ritchie... they are the real IT heroes!
+* Sir Clive Sinclair, Tony Tebby, Adriano Olivetti, Brian Kernighan and Dennis Ritchie... they are the real IT heroes!
 
 
 ### About releases
 
-Main Project link: https://github.com/afonzeca/arun
+* Main Project link: https://github.com/afonzeca/arun
 
-Core Library Project link: https://github.com/afonzeca/arun-core
+* Core Library Project link: https://github.com/afonzeca/arun-core
 
-See changelog.txt inside the package for details about releases and improvements.
+* See changelog.txt inside the package for details about releases and improvements.
 
 ### Contacts
 
-Linkedin contact https://www.linkedin.com/in/angelo-f-1806868/
+* Linkedin contact https://www.linkedin.com/in/angelo-f-1806868/
 
 Thank you so much for your interest in ArunCore!
 Angelo Fonzeca
