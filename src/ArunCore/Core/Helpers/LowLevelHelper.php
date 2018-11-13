@@ -231,9 +231,9 @@ class LowLevelHelper implements LowLevelHelperInterface
      *
      * @throws \Exception
      */
-    public function isDomainEnabled(string $domain): bool
+    public function isDomainEnabled(string $className): bool
     {
-        $rClass = $this->getReflectionClassFromDomain($domain);
+        $rClass = $this->getReflectionClassFromDomain($className);
 
         $domainStatus = $this->aReader->getClassAnnotation($rClass, "\ArunCore\Annotations\DomainEnabled");
         if ($domainStatus != null) {
@@ -256,7 +256,6 @@ class LowLevelHelper implements LowLevelHelperInterface
      */
     public function isActionPresent(string $className, string $domain, string $action)
     {
-
         $methodsList = $this->getClassPublicMethods($className, $domain);
 
         foreach ($methodsList as $method) {
@@ -340,8 +339,11 @@ class LowLevelHelper implements LowLevelHelperInterface
     {
         $synopsis = [];
 
-        foreach ($this->getClassListAssociatedToDomains() as $domain) {
-            if ($domain !== "command") {
+        $classesArray = $this->getClassListAssociatedToDomains()->toArray();
+        sort($classesArray);
+
+        foreach ($classesArray as $domain) {
+            if ($domain !== "command" && $this->isDomainEnabled($domain)) {
                 $synopsis[$domain] = $this->getDomainSynopsis(DomainActionNameGenerator::getFQDNClass($domain));
             }
         }

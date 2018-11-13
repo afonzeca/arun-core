@@ -55,8 +55,7 @@ class HelpGenerator implements HelpGeneratorInterface
     public function __construct(
         LowLevelHelperInterface $lHelper,
         ConsoleOutputInterface $cOut
-    )
-    {
+    ) {
         $this->lHelper = $lHelper;
         $this->cOut = $cOut;
     }
@@ -203,21 +202,19 @@ class HelpGenerator implements HelpGeneratorInterface
 
         foreach ($help as $name => $item) {
 
-            if ($name == "default") {
-                $name = "'no parameters'";
-            }
+            if ($name != "default") {
 
-            $this->cOut->write("  #BLUE#" . $name . "#DEF#");
+                $this->cOut->write("  #BLUE#" . $name . "#DEF#");
 
-            if ($item != "") {
-                $this->cOut->write(": " . $item . "\r\n");
+                if ($item != "") {
+                    $this->cOut->write(": " . $item . "\r\n");
+                }
+                $this->cOut->blank();
             }
-            $this->cOut->blank();
         }
 
         $this->cOut->writeln("Please write " . $_SERVER["SCRIPT_FILENAME"] . " DOMAIN:help to list the ACTIONS available for a DOMAIN");
         $this->cOut->blank();
     }
-
 
 }

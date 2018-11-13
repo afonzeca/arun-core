@@ -26,30 +26,24 @@ namespace ArunCore\Annotations;
  * @Annotation
  * @Target("METHOD")
  *
- * Set if an Action is public and can be called from CLI
+ * Define the list of annotations
  *
  */
-class ActionEnabled
+class ActionEOA
 {
     /**
-     * @var bool
+     * @var string
      */
-    public $enabled;
+    public $actionName;
 
     /**
-     * ActionEnabled constructor.
+     * ActionEOA constructor.
      *
-     * @param array $action
+     * @param array $actionName
      */
-    public function __construct(array $action)
+    public function __construct(array $actionName)
     {
-        if(count($action) == 0) {
-            $this->enabled = false;
-
-            return;
-        }
-
-        $this->enabled = (bool)($action["value"]);
+        $this->actionName = $actionName;
     }
 
 }

@@ -1,14 +1,14 @@
-## "Arun-Core" for Arun CLI Microframework PHP7.2+ - Version 0.41-alpha - (C) 2018 by Angelo Fonzeca
+## "Arun-Core" for Arun CLI Microframework PHP7.2+ - Version 0.42-alpha - (C) 2018 by Angelo Fonzeca
 
 ### What is Arun-Core?
 
 Arun-Core is the "core" library part of the [Arun CLI Microframework Project for PHP 7.2+](https://github.com/afonzeca/arun).
 
-Starting from the 0.41-alpha version of the Arun project, the Core (API) and the MicroFramework Project Container("boilerplate") were splitted into two
+Starting from the 0.41 - alpha version of the Arun project, the Core (API) and the MicroFramework Project Container("boilerplate") were splitted into two
 different repositories for improving code quality, the whole project organization and documentation.
 
 Arun-Core contains all the APIs used by Arun. For low level API analysis please take a look to the [API Index](docs/ApiIndex.md) file which helps you to navigate through the documentation
-( generated with PhpDocumentator and PhpDocMd ).
+( generated with PhpDocumentator and PhpDocMd - NOTE: The docs about API in the version 0.42-alpha, due to lack of time, has not been updated  ).
 
 For further information please refer to the [main project](https://github.com/afonzeca/arun) documentation.
 
@@ -45,7 +45,6 @@ Main Project link: https://github.com/afonzeca/arun
 Core Library Project link: https://github.com/afonzeca/arun-core
 
 See changelog.txt inside the package for details about releases and improvements.
-
 
 ### Contacts
 

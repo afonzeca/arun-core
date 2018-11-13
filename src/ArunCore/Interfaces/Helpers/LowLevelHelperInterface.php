@@ -80,7 +80,7 @@ interface LowLevelHelperInterface
      *
      * @throws \Exception
      */
-    public function isDomainEnabled(string $domain): bool;
+    public function isDomainEnabled(string $className): bool;
 
     /**
      * @param string $domain

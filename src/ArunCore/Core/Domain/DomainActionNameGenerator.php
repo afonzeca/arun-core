@@ -75,6 +75,16 @@ class DomainActionNameGenerator implements DomainActionNameGeneratorInterface
     }
 
     /**
+     * @param string $domain
+     *
+     * @return string
+     */
+    public static function getDomainClassName(string $domain): string
+    {
+        return sprintf("%sDomain", ucfirst($domain));
+    }
+
+    /**
      * @param string $class
      *
      * @return string

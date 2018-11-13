@@ -39,6 +39,8 @@ interface DomainActionNameGeneratorInterface
     public function getClassAndMethodNamesForCalling(): array;
 
     /**
+     * Get the fully qualified name of a class (NAMESPACE + CLASSNAME)
+     *
      * @param string $domain
      *
      * @return string
@@ -46,6 +48,8 @@ interface DomainActionNameGeneratorInterface
     public static function getFQDNClass(string $domain): string;
 
     /**
+     * Extract the DomainName from a Class (e.g. TestDomain => Test)
+     *
      * @param string $class
      *
      * @return string
@@ -53,4 +57,13 @@ interface DomainActionNameGeneratorInterface
      * @throws \ReflectionException
      */
     public static function extractDomainNameFromClassName(string $class);
+
+    /**
+     * Get the DomainClass name starting from Domain name (Eg. Test => TestDomain)
+     *
+     * @param string $domain
+     *
+     * @return string
+     */
+    public static function getDomainClassName(string $domain): string;
 }
