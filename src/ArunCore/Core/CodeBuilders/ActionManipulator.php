@@ -111,7 +111,7 @@ class ActionManipulator implements ActionManipulatorInterface
             (string)($domainClassCode)
         );
 
-        $newParam = "* @var " . $newParam . "\r\n     * @SET\ActionEOA(\"$actionName\")";
+        $newParam = "* @var " . $newParam . "\r     * @SET\ActionEOA(\"$actionName\")";
 
         return str_replace("* @SET\ActionEOA(\"$actionName\")", $newParam, $class);
     }
