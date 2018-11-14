@@ -97,7 +97,7 @@ class DomainManipulator implements DomainManipulatorInterface
         $lastClassBracketIdx = $this->getLastCurlBracketPositionFromClass($domainClass);
 
         $domainClass = substr_replace($domainClass, $actionSchema, $lastClassBracketIdx);
-        $domainClass .= "\r}";
+        $domainClass .= "\n}";
 
         return $domainClass;
     }
