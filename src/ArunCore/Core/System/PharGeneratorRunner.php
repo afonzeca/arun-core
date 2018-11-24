@@ -25,7 +25,9 @@
 
 namespace ArunCore\Core\System;
 
-class PharGeneratorRunner
+use ArunCore\Interfaces\System\PharGeneratorRunnerInterface;
+
+class PharGeneratorRunner implements PharGeneratorRunnerInterface
 {
 
     /**
