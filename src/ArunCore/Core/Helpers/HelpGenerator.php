@@ -47,6 +47,11 @@ class HelpGenerator implements HelpGeneratorInterface
     private $lHelper;
 
     /**
+     * @var typeDictionary
+     */
+    private $typeDictionary;
+
+    /**
      * HelpGenerator constructor.
      *
      * @param LowLevelHelperInterface $lHelper
@@ -55,9 +60,15 @@ class HelpGenerator implements HelpGeneratorInterface
     public function __construct(
         LowLevelHelperInterface $lHelper,
         ConsoleOutputInterface $cOut
-    ) {
+    )
+    {
         $this->lHelper = $lHelper;
         $this->cOut = $cOut;
+        $this->typeDictionary = [
+            "int" => "Accepts only integer numbers",
+            "string" => "Accepts alphanumeric characters",
+            "float" => "Accepts only decimal numbers"
+        ];
     }
 
     /**
@@ -94,6 +105,8 @@ class HelpGenerator implements HelpGeneratorInterface
      */
     private function printParameterSyntax(array $parameters): bool
     {
+        $idx = 1;
+
         if (count($parameters) > 0) {
             foreach ($parameters as $param) {
 
@@ -101,18 +114,28 @@ class HelpGenerator implements HelpGeneratorInterface
                 $ec = ">";
                 $default = "";
 
+                $typeKey = ($param->hasType()) ? $param->getType() : "";
+
                 if ($param->isOptional()) {
                     $sc = "[";
                     $ec = "]";
                     $default = $param->getDefaultValue();
                 }
 
+                $this->cOut->write("  #LGRAY#Argument $idx  : #DEF#");
+
                 $this->cOut->write($sc . $param->name);
 
                 if ($default != "") {
                     echo "=$default";
                 }
+
                 $this->cOut->write($ec . " ");
+                if ($typeKey != "") {
+                    $this->cOut->writeln("#BLUE# ( " . $this->typeDictionary["{$typeKey}"] . " )#DEF#");
+                }
+
+                $idx++;
             }
 
             return true;
@@ -149,39 +172,49 @@ class HelpGenerator implements HelpGeneratorInterface
 
         $this->cOut->writeln("Usage: ");
         $this->cOut->blank();
-        $this->cOut->writeln("  #BLUE#$domain#DEF#:#BLUE#ACTION#DEF# [options] [arguments]");
-        $this->cOut->blank();
 
-        $this->cOut->writeln("Where ACTIONs are:");
-        $this->cOut->blank();
+        if (count($actions) > 1) {
+            $this->cOut->writeln("  #BLUE#$domain#DEF#:#BLUE#ACTION#DEF# [options] [arguments]");
+            $this->cOut->blank();
+            $this->cOut->writeln("Where ACTIONs are:");
+            $this->cOut->blank();
+        } else {
+            $this->cOut->writeln("  #BLUE#$domain#DEF# [options] [arguments]");
+        }
+
         $class = new \ReflectionClass($classInstance);
+
 
         foreach ($actions as $name => $desc) {
 
+            $idx = 1;
+
             $parameters = $class->getMethod($name)->getParameters();
+            $spaces = ($name == "default") ? "" : "  ";
 
+            if ($name !== "default") {
+                $this->cOut->writeln("#CYAN#" . $name . "#DEF#");
+            }
 
-            $this->cOut->writeln("#CYAN#" . $name . "#DEF#");
             if (isset($desc[0])) {
-                $this->cOut->write("  #LGRAY#Description:#DEF# " . $desc[0] . "\r\n");
+                $this->cOut->write("{$spaces}#LGRAY#Description :#DEF# " . $desc[0] . "\r\n");
             }
 
             if (count($parameters) > 0) {
-                $this->cOut->write("  #LGRAY#Parameters :#DEF# ");
-            }
 
-            if ($this->printParameterSyntax($parameters)) {
-                $this->cOut->blank();
+                $this->printParameterSyntax($parameters);
             }
 
             if (isset($desc["options"])) {
                 foreach ($desc["options"] as $option) {
-                    $this->cOut->write("  #LGRAY#Option     :#DEF# #PURPLE#" . $option[0]);
+                    $this->cOut->write("  #LGRAY#Option   {$idx}  :#DEF# #PURPLE#" . $option[0]);
                     $this->cOut->writeln("#DEF##LBLUE# ( " . $option[1] . " )#DEF#");
+                    $idx++;
                 }
             }
 
             $this->cOut->blank();
+
         }
     }
 
@@ -193,28 +226,46 @@ class HelpGenerator implements HelpGeneratorInterface
     private
     function helpMessageGlobalBody(array $help): void
     {
-        $this->cOut->writeln("Usage: ");
+
+        $this->cOut->writeln("#CYAN#Usage: #DEF#");
         $this->cOut->blank();
-        $this->cOut->writeln("  #BLUE#DOMAIN#DEF#:#BLUE#ACTION#DEF# [options] [arguments]");
-        $this->cOut->blank();
-        $this->cOut->writeln("Available DOMAINS (set of aggregate commands) are:");
+        $this->cOut->writeln("  [#BLUE#DOMAIN#DEF#:#BLUE#ACTION#DEF#] [options] [arguments]");
         $this->cOut->blank();
 
-        foreach ($help as $name => $item) {
+        if (count($help) == 1) {
+            $this->cOut->writeln("#CYAN#General Options:#DEF#");
+            $this->cOut->blank();
+            $this->cOut->writeln("-h, --help     Display this help message");
+            $this->cOut->writeln("-V, --version  Show Application version");
+            $this->cOut->blank();
 
-            if ($name != "default") {
-
-                $this->cOut->write("  #BLUE#" . $name . "#DEF#");
-
-                if ($item != "") {
-                    $this->cOut->write(": " . $item . "\r\n");
-                }
-                $this->cOut->blank();
-            }
+            return;
         }
 
-        $this->cOut->writeln("Please write " . $_SERVER["SCRIPT_FILENAME"] . " DOMAIN:help to list the ACTIONS available for a DOMAIN");
+        if (count($help) > 1) {
+            $this->cOut->writeln("#CYAN#Where DOMAINs (set of aggregate commands) are:#DEF#");
+            $this->cOut->blank();
+
+            foreach ($help as $name => $item) {
+
+                if ($name != "default") {
+
+                    $this->cOut->write("  #BLUE#" . $name . "#DEF#");
+
+                    if ($item != "") {
+                        $this->cOut->write(": " . $item . "\r\n");
+                    }
+                    $this->cOut->blank();
+                }
+            }
+
+            $this->cOut->writeln("Please write " . $_SERVER["SCRIPT_FILENAME"] . " DOMAIN:help to list the ACTIONs available for a DOMAIN");
+            $this->cOut->blank();
+
+            return;
+        }
+
+        $this->cOut->writeln("#RED#No available DOMAINs!#DEF#");
         $this->cOut->blank();
     }
-
 }

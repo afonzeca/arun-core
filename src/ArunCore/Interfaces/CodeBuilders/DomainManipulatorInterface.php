@@ -1,6 +1,6 @@
 <?php
 /**
-* This file is part of "Arun-Core" Core Library for "Arun - CLI Microframework for Php7.2+" released under the following terms
+ * This file is part of "Arun-Core" Core Library for "Arun - CLI Microframework for Php7.2+" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
@@ -69,5 +69,23 @@ interface DomainManipulatorInterface
      * @return bool
      */
     public function addActionIntoDomain(string $domainName, string $actionName, string $synopsis, string $enabledString): bool;
+
+    /**
+     * Disable an existing domain
+     *
+     * @param string $domainName
+     *
+     * @return bool|int
+     */
+    public function disableDomain(string $domainName);
+
+    /**
+     * Enable an existing domain
+     *
+     * @param string $domainName
+     *
+     * @return bool|int
+     */
+    public function enableDomain(string $domainName);
 
 }

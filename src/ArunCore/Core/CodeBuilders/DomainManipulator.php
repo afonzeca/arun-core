@@ -1,6 +1,6 @@
 <?php
 /**
-* This file is part of "Arun-Core" Core Library for "Arun - CLI Microframework for Php7.2+" released under the following terms
+ * This file is part of "Arun-Core" Core Library for "Arun - CLI Microframework for Php7.2+" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
@@ -54,14 +54,15 @@ class DomainManipulator implements DomainManipulatorInterface
     public function __construct(
         FileContentGeneratorInterface $fileGen,
         ConsoleOutputInterface $cOut
-    ) {
+    )
+    {
         $this->fileMan = $fileGen;
         $this->cOut = $cOut;
     }
 
     /**
      * Get the Last Curl Bracket of a class
-     * 
+     *
      * @param $domainClass
      * @param $matches
      * @return mixed
@@ -198,6 +199,44 @@ class DomainManipulator implements DomainManipulatorInterface
     }
 
     /**
+     * Disable an existing domain
+     *
+     * @param string $domainName
+     * @return bool|int
+     */
+    public function disableDomain(string $domainName)
+    {
+        $domainClassCode = $this->fileMan->loadDomainCode($domainName);
+
+        $domainClassCode = str_replace(
+            "@SET\DomainEnabled(true)",
+            "@SET\DomainEnabled(false)",
+            $domainClassCode
+        );
+
+        return $this->fileMan->storeDomainCode($domainName, $domainClassCode, true);
+    }
+
+    /**
+     * Enable an existing domain
+     *
+     * @param string $domainName
+     * @return bool|int
+     */
+    public function enableDomain(string $domainName)
+    {
+        $domainClassCode = $this->fileMan->loadDomainCode($domainName);
+
+        $domainClassCode = str_replace(
+            "@SET\DomainEnabled(false)",
+            "@SET\DomainEnabled(true)",
+            $domainClassCode
+        );
+
+        return $this->fileMan->storeDomainCode($domainName, $domainClassCode, true);
+    }
+
+    /**
      * Check if the Action method is already present in the domain class code
      *
      * @param string $actionName
@@ -211,5 +250,6 @@ class DomainManipulator implements DomainManipulatorInterface
 
         return preg_match($functionPattern, $domainClassCode) > 0 ? true : false;
     }
+
 
 }
