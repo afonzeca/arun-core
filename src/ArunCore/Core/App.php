@@ -32,6 +32,7 @@
 
 namespace ArunCore\Core;
 
+use MongoDB\Driver\Exception\ExecutionTimeoutException;
 use Psr\Container\ContainerInterface;
 
 class App
@@ -39,22 +40,36 @@ class App
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private static $container;
 
     /**
      * App constructor.
      */
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
-        $this->container = null;
+        self::$container = $container;
     }
 
     /**
-     * @param ContainerInterface $container
+     * Makes Object from Container
+     *
+     * @param string $interfaceName
+     *
+     * @return \Object
+     *
+     * @throws \Exception
      */
-    public function setContainer(ContainerInterface $container)
+    public static function make(string $interfaceName)
     {
-        $this->container = $container;
+        if (self::$container === null) {
+            throw new \Exception("Undefined DI Container");
+        }
+
+        try {
+            return self::$container->get($interfaceName);
+        } catch (\Exception $ex) {
+            echo "Unable to find Interface inside container " . $ex->getMessage();
+        }
     }
 
     /**
@@ -64,9 +79,9 @@ class App
      */
     function run()
     {
-        if ($this->container != null) {
+        if (self::$container != null) {
 
-            $this->container
+            self::$container
                 ->make("ArunCore\Interfaces\Core\ArunCoreInterface")
                 ->start();
 

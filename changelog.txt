@@ -1,6 +1,11 @@
 List of changes:
 
-* v0.44-alpha   - Changes Made:
+* v0.45.*-alpha   - Changes Made:
+
+          1) Added facade support
+          2) README.md update
+
+* v0.44.*-alpha   - Changes Made:
 
           1) Added Phar generator runner (Core/System)
           2) Some DI Configuration fixed (PATH)
